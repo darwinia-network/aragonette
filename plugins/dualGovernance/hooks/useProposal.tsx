@@ -64,7 +64,7 @@ export function useProposal(proposalId: string, autoRefresh = false) {
         address: PUB_DUAL_GOVERNANCE_PLUGIN_ADDRESS,
         event: ProposalCreatedEvent as any,
         args: {
-          proposalId,
+          proposalId: BigInt(proposalId),
         } as any,
         fromBlock: proposalData.parameters.snapshotBlock,
         toBlock: proposalData.parameters.startDate,

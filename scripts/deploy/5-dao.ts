@@ -10,8 +10,6 @@ import {
 import { type Address, type Hex, type Log, decodeEventLog, toHex } from "viem";
 import { deploymentPublicClient as publicClient, deploymentWalletClient as walletClient } from "../lib/util/client";
 import { deploymentAccount as account } from "../lib/util/account";
-import { uploadToIPFS } from "@/utils/ipfs";
-import { deploymentIpfsClient as ipfsClient } from "../lib/util/ipfs";
 import { ABI as DaoFactoryABI } from "../lib/artifacts/dao-factory";
 import { ABI as DaoRegistryABI } from "../lib/artifacts/dao-registry";
 import { ABI as PluginSetupProcessorABI } from "../lib/artifacts/plugin-setup-processor";
@@ -20,6 +18,8 @@ import { PREPARE_INSTALLATION_ABI as DualGovernancePrepareInstallationAbi } from
 import { encodeAbiParameters } from "viem";
 
 const EXPECTED_PLUGIN_COUNT = 2;
+
+const PINATA_JWT_API_KEY = process.env.DEPLOYMENT_PINATA_JWT_API_KEY || "";
 
 export async function deployDao(daoToken: Address, tokenVotingPluginRepo: Address, dualGovernancePluginRepo: Address) {
   const daoFactoryAddr = getDaoFactoryAddress();
@@ -60,7 +60,7 @@ export async function deployDao(daoToken: Address, tokenVotingPluginRepo: Addres
   return { daoAddress, subdomain, installedPlugins };
 }
 
-function pinDaoMetadata(): Promise<Hex> {
+async function pinDaoMetadata(): Promise<Hex> {
   // Add additional metadata fields if needed
   const daoMetadata = {
     name: DEPLOYMENT_DAO_NAME,
@@ -73,16 +73,34 @@ function pinDaoMetadata(): Promise<Hex> {
     //   },
     // ],
   };
-  const blob = new Blob([JSON.stringify(daoMetadata)], {
-    type: "application/json",
-  });
-
-  return uploadToIPFS(ipfsClient, blob)
+  return uploadToIPFS(JSON.stringify(daoMetadata))
     .then((res) => toHex(res))
     .catch((err) => {
+      console.log(err);
       console.warn("Warning: Could not pin the DAO metadata on IPFS");
       return "0x";
     });
+}
+
+async function uploadToIPFS(metadata: JSON) {
+  const res = await fetch("https://api.pinata.cloud/pinning/pinJSONToIPFS", {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + PINATA_JWT_API_KEY,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      pinataOptions: {
+        cidVersion: 0,
+      },
+      pinataContent: metadata,
+    }),
+  });
+
+  const c = await res.json();
+
+  console.log(`Uploaded to IPFS with cid ${c.IpfsHash.toString()}`);
+  return c.IpfsHash.toString();
 }
 
 function getTokenVotingInstallSettings(daoToken: Address, tokenVotingPluginRepo: Address): PluginInstallSettings {
