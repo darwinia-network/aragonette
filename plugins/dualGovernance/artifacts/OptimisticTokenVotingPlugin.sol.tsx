@@ -58,22 +58,6 @@ export const OptimisticTokenVotingPluginAbi = [
     type: "error",
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "limit",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "actual",
-        type: "uint256",
-      },
-    ],
-    name: "MinProposerVotingPowerOutOfBounds",
-    type: "error",
-  },
-  {
     inputs: [],
     name: "NoVotingPower",
     type: "error",
@@ -357,19 +341,6 @@ export const OptimisticTokenVotingPluginAbi = [
     ],
     name: "VetoCast",
     type: "event",
-  },
-  {
-    inputs: [],
-    name: "OPTIMISTIC_GOVERNANCE_INTERFACE_ID",
-    outputs: [
-      {
-        internalType: "bytes4",
-        name: "",
-        type: "bytes4",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
   },
   {
     inputs: [],
