@@ -16,6 +16,7 @@ cd aragonette
 To get the development server running, simply execute:
 
 ```bash
+cp .env.example .env
 bun install
 bun dev
 ```
