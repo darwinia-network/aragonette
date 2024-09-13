@@ -1,10 +1,11 @@
 import { type ReactNode } from "react";
 import { Navbar } from "./nav/navbar";
 import Image from "next/image";
+import Footer from "./footer";
 
 export const Layout: React.FC<{ children: ReactNode }> = (props) => {
   return (
-    <div className="flex flex-col items-center gap-20 bg-[#000]">
+    <div className="flex flex-col items-center bg-[#000]">
       <div className="flex w-full flex-col items-center">
         <Image
           src="/images/1920bg1.png"
@@ -29,7 +30,7 @@ export const Layout: React.FC<{ children: ReactNode }> = (props) => {
         </div>
       </div>
 
-      {/* Footer */}
+      <Footer />
     </div>
   );
 };

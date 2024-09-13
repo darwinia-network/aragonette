@@ -117,6 +117,7 @@ export default function Proposals() {
                   hairs: "CURLY",
                 }}
                 primaryButton={{
+                  className: "bg-[#afafaf] text-[#000] border-none hover:bg-[#000] hover:text-[#fff] duration-300 ",
                   label: "Connect your wallet",
                   onClick: () => open(),
                 }}
