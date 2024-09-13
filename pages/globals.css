@@ -39,7 +39,6 @@ h6 {
   color: #fff;
 }
 
-p,
 ul,
 ol {
   /* Variables imported from layout.tsx > @aragon/ods */

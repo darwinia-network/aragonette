@@ -61,6 +61,7 @@ export default function Proposals() {
           ))}
           <div className="mb-10 mt-4 flex w-full flex-row justify-end gap-2">
             <Button
+              className="border-none !bg-[#000000] !text-[#fff] duration-300 hover:!bg-[#afafaf] hover:!text-[#000000] "
               variant="tertiary"
               size="sm"
               disabled={!showPrev}
@@ -70,6 +71,7 @@ export default function Proposals() {
               Previous
             </Button>
             <Button
+              className="border-none !bg-[#000000] !text-[#fff] duration-300 hover:!bg-[#afafaf] hover:!text-[#000000] "
               variant="tertiary"
               size="sm"
               disabled={!showNext}
@@ -97,6 +99,8 @@ export default function Proposals() {
                   hairs: "CURLY",
                 }}
                 primaryButton={{
+                  className:
+                    "!bg-[#000000] !text-[#fff] hover:!bg-[#afafaf] hover:!text-[#000000] border-none duration-300 ",
                   label: "Submit the first one",
                   iconLeft: IconType.PLUS,
                   onClick: () => push("#/new"),
@@ -117,7 +121,8 @@ export default function Proposals() {
                   hairs: "CURLY",
                 }}
                 primaryButton={{
-                  className: "bg-[#afafaf] text-[#000] border-none hover:bg-[#000] hover:text-[#fff] duration-300 ",
+                  className:
+                    "!bg-[#000000] !text-[#fff] hover:!bg-[#afafaf] hover:!text-[#000000] border-none duration-300 ",
                   label: "Connect your wallet",
                   onClick: () => open(),
                 }}

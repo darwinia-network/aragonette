@@ -39,6 +39,22 @@ export const Navbar: React.FC = () => {
               Aragonette
             </span> */}
           </Link>
+          <div className="flex items-center gap-x-2">
+            <div className="shrink-0">
+              <WalletContainer />
+            </div>
+
+            {/* Nav Trigger */}
+            {/* <button
+              onClick={() => setOpen(true)}
+              className={classNames(
+                "rounded-full border border-neutral-100 bg-neutral-0 p-1 md:hidden",
+                "outline-none focus:outline-none focus-visible:ring focus-visible:ring-primary focus-visible:ring-offset" // focus styles
+              )}
+            >
+              <AvatarIcon size="lg" icon={IconType.MENU} />
+            </button> */}
+          </div>
         </div>
 
         {/* Tab wrapper */}
