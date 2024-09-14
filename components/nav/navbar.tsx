@@ -39,7 +39,7 @@ export const Navbar: React.FC = () => {
               Aragonette
             </span> */}
           </Link>
-          <div className="flex items-center gap-x-2">
+          <div className="z-20 flex items-center gap-x-2">
             <div className="shrink-0">
               <WalletContainer />
             </div>
