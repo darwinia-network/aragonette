@@ -172,7 +172,7 @@ export default function Create() {
               <Icon
                 className={
                   "mt-2 !h-12 !w-10 p-2 " +
-                  (actionType === ActionType.Signaling ? "text-primary-400" : "text-neutral-400")
+                  (actionType === ActionType.Signaling ? "text-[#ff0083]" : "text-neutral-400")
                 }
                 icon={IconType.INFO}
                 size="lg"
@@ -188,7 +188,7 @@ export default function Create() {
               <Icon
                 className={
                   "mt-2 !h-12 !w-10 p-2 " +
-                  (actionType === ActionType.Withdrawal ? "text-primary-400" : "text-neutral-400")
+                  (actionType === ActionType.Withdrawal ? "text-[#ff0083]" : "text-neutral-400")
                 }
                 icon={IconType.WITHDRAW}
                 size="lg"
@@ -203,7 +203,7 @@ export default function Create() {
             >
               <Icon
                 className={
-                  "mt-2 !h-12 !w-10 p-2 " + (actionType === ActionType.Custom ? "text-primary-400" : "text-neutral-400")
+                  "mt-2 !h-12 !w-10 p-2 " + (actionType === ActionType.Custom ? "text-[#ff0083]" : "text-neutral-400")
                 }
                 icon={IconType.BLOCKCHAIN_BLOCKCHAIN}
                 size="lg"

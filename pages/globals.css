@@ -77,3 +77,13 @@ label div p.leading-tight {
   border-color: #ff0083 !important;
 }
 
+
+.VotingIcon svg:first-child path {
+  fill: #000;
+
+}
+
+.VotingIcon svg:first-child path {
+  fill: #ff0083;
+
+}
