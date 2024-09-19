@@ -97,10 +97,11 @@ export default function Proposals() {
                   body: "VOTING",
                   expression: "SMILE",
                   hairs: "CURLY",
+                  color: "ff0083",
                 }}
                 primaryButton={{
                   className:
-                    "!bg-[#000000] !text-[#fff] hover:!bg-[#afafaf] hover:!text-[#000000] border-none duration-300 ",
+                    "!bg-transparent !text-[#000] !border-[#000] !border-[2px] !border-solid hover:!bg-[#000] hover:!text-[#fff] hover:!border-none duration-300 ",
                   label: "Submit the first one",
                   iconLeft: IconType.PLUS,
                   onClick: () => push("#/new"),

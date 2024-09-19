@@ -140,7 +140,7 @@ export default function Create() {
         <h1 className="mb-10 text-3xl font-semibold text-[#fff]">Create Proposal</h1>
         <div className="mb-6">
           <InputText
-            className="text-[#000]"
+            className="!text-[#000]"
             label="Title"
             maxLength={100}
             placeholder="A short title that describes the main purpose"
@@ -253,7 +253,7 @@ export default function Create() {
                 </Else>
               </If>
               <Button
-                className="mt-3 border-[1px] border-[#fff] bg-transparent duration-300 hover:bg-[#fff] hover:text-[#000]"
+                className="mt-3 border-[1px] border-[#fff] bg-transparent duration-300 hover:bg-[#fff] hover:text-[#000] disabled:!border-[#fff] disabled:!bg-transparent disabled:!text-[#fff] disabled:opacity-50"
                 size="lg"
                 variant="primary"
                 disabled={!actions.length}

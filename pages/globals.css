@@ -66,3 +66,14 @@ label div p.leading-tight {
   }
 }
 */
+
+
+/* Overrides for aragon ods */
+.text-neutral-800 , .text-neutral-900 {
+  color: #fff !important;
+}
+
+.border-primary-300 {
+  border-color: #ff0083 !important;
+}
+

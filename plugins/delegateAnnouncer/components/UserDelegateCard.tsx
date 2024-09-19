@@ -76,7 +76,9 @@ export const SelfDelegationProfileCard = ({
           alt="profile pic"
         />
         <div className="flex flex-col justify-center">
-          <Link className="!font-xl !text-xl">{result.data ? result.data : formatHexString(address)}</Link>
+          <Link className="!font-xl !text-xl !text-[#ff0083]">
+            {result.data ? result.data : formatHexString(address)}
+          </Link>
           <p className="text-md text-neutral-300">{votingPower ? formatUnits(votingPower!, 18)! : 0} Voting Power</p>
         </div>
       </div>
@@ -101,7 +103,12 @@ export const SelfDelegationProfileCard = ({
       <div className="flex flex-row gap-2">
         <If condition={delegates !== address}>
           <div className="mt-1">
-            <Button variant="secondary" size="sm" onClick={() => delegateTo()}>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => delegateTo()}
+              className="!border-[#000] !bg-transparent !text-[#000] hover:!border-none hover:!bg-[#000] hover:!text-[#fff]"
+            >
               Delegate
             </Button>
           </div>
@@ -109,6 +116,7 @@ export const SelfDelegationProfileCard = ({
         <If not={message}>
           <div className="mt-1">
             <Button
+              className="!border-none !bg-[#000] !text-[#fff] disabled:opacity-50"
               variant="primary"
               size="sm"
               disabled={inputDescription === "<p></p>" || !inputDescription}
