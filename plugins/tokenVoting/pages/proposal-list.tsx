@@ -61,6 +61,7 @@ export default function Proposals() {
           ))}
           <div className="mb-10 mt-4 flex w-full flex-row justify-end gap-2">
             <Button
+              className="border-none !bg-[#000000] !text-[#fff] duration-300 hover:!bg-[#afafaf] hover:!text-[#000000] "
               variant="tertiary"
               size="sm"
               disabled={!showPrev}
@@ -70,6 +71,7 @@ export default function Proposals() {
               Previous
             </Button>
             <Button
+              className="border-none !bg-[#000000] !text-[#fff] duration-300 hover:!bg-[#afafaf] hover:!text-[#000000] "
               variant="tertiary"
               size="sm"
               disabled={!showNext}
@@ -87,7 +89,7 @@ export default function Proposals() {
         </ElseIf>
         <ElseIf condition={isConnected}>
           <SectionView>
-            <Card className="w-full">
+            <Card className="VotingIcon w-full ">
               <EmptyState
                 className="w-full md:w-full lg:w-full xl:w-full"
                 heading="There are no proposals yet"
@@ -95,8 +97,11 @@ export default function Proposals() {
                   body: "VOTING",
                   expression: "SMILE",
                   hairs: "CURLY",
+                  color: "ff0083",
                 }}
                 primaryButton={{
+                  className:
+                    "!bg-transparent !text-[#000] !border-[#000] !border-[2px] !border-solid hover:!bg-[#000] hover:!text-[#fff] hover:!border-none duration-300 ",
                   label: "Submit the first one",
                   iconLeft: IconType.PLUS,
                   onClick: () => push("#/new"),
@@ -117,6 +122,8 @@ export default function Proposals() {
                   hairs: "CURLY",
                 }}
                 primaryButton={{
+                  className:
+                    "!bg-[#000000] !text-[#fff] hover:!bg-[#afafaf] hover:!text-[#000000] border-none duration-300 ",
                   label: "Connect your wallet",
                   onClick: () => open(),
                 }}

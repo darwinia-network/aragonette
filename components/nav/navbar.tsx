@@ -12,7 +12,7 @@ export const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
 
   const navLinks: INavLink[] = [
-    { path: "/", id: "dashboard", name: "Dashboard", icon: IconType.APP_DASHBOARD },
+    // { path: "/", id: "dashboard", name: "Dashboard", icon: IconType.APP_DASHBOARD },
     ...plugins.map((p) => ({
       id: p.id,
       name: p.title,
@@ -23,7 +23,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      <nav className="h-30 sticky top-0 w-full flex-col gap-2 border-b border-b-neutral-100 bg-neutral-0 p-3 md:px-6 md:pb-0 md:pt-5 lg:gap-3">
+      <nav className="h-30 top-0 w-full flex-col gap-2 border-b border-b-neutral-100 p-3 md:px-6 md:pb-0 md:pt-5 lg:gap-3">
         <div className="flex w-full items-center justify-between">
           <Link
             href="/"
@@ -32,19 +32,20 @@ export const Navbar: React.FC = () => {
               "outline-none focus:outline-none focus-visible:ring focus-visible:ring-primary focus-visible:ring-offset" // focus styles
             )}
           >
-            <Image src="/logo-bw-lg.png" width="36" height="36" className="shrink-0" alt="Aragonette" />
-            <span className="hidden py-1 text-lg font-semibold leading-tight text-neutral-700 sm:block md:text-xl">
-              Aragonette
-            </span>
-          </Link>
+            <Image src="/images/logo-icon.png" width="36" height="36" className="shrink-0" alt="Ring Dao" />
+            <Image src="/images/logo.png" width="100" height="36" className="shrink-0" alt="Ring Dao" />
 
-          <div className="flex items-center gap-x-2">
+            {/* <span className="hidden py-1 text-lg font-semibold leading-tight text-[#fff] sm:block md:text-xl">
+              Aragonette
+            </span> */}
+          </Link>
+          <div className="z-20 flex items-center gap-x-2">
             <div className="shrink-0">
               <WalletContainer />
             </div>
 
             {/* Nav Trigger */}
-            <button
+            {/* <button
               onClick={() => setOpen(true)}
               className={classNames(
                 "rounded-full border border-neutral-100 bg-neutral-0 p-1 md:hidden",
@@ -52,7 +53,7 @@ export const Navbar: React.FC = () => {
               )}
             >
               <AvatarIcon size="lg" icon={IconType.MENU} />
-            </button>
+            </button> */}
           </div>
         </div>
 

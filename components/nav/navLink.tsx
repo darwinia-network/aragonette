@@ -38,15 +38,7 @@ export const NavLink: React.FC<INavLinkProps> = (props) => {
   }
 
   const containerClasses = classNames(
-    "group relative md:-mb-0.25 md:border-b md:hover:border-b-neutral-800", // base styles
-    {
-      "md:border-b-transparent md:active:border-b-primary-400": !selected, // unselected link styles
-      "md:border-b-primary-400 md:hover:border-b-primary-400": selected, // base selected link styles
-
-      // using after so that the size of the links don't change when one is selected and active
-      "md:after:bg-primary-400 md:after:content-[attr(aria-current)] md:active:after:hidden": selected,
-      "md:after:absolute md:after:-bottom-0 md:after:left-0 md:after:right-0 md:after:h-[1px]": selected,
-    }
+    "group relative md:-mb-0.25" // base styles
   );
 
   const anchorClasses = classNames(
@@ -54,10 +46,7 @@ export const NavLink: React.FC<INavLinkProps> = (props) => {
     "group-hover:text-neutral-800", // hover styles
     "outline-none focus-visible:ring focus-visible:ring-primary focus-visible:ring-offset", // focus styles
     "flex h-12 flex-1 items-center justify-between gap-3 rounded-xl px-4 leading-tight", // mobile styles
-    "md:h-11 md:rounded-none md:px-0 md:leading-normal", // desktop nav styles
-    {
-      "bg-neutral-50 md:bg-neutral-0": selected,
-    }
+    "md:h-11 md:rounded-none md:px-0 md:leading-normal" // desktop nav styles
   );
 
   return (
@@ -67,14 +56,14 @@ export const NavLink: React.FC<INavLinkProps> = (props) => {
           <Icon
             icon={icon}
             size="md"
-            className={classNames("text-neutral-300 group-hover:text-neutral-800 lg:hidden", {
-              "text-neutral-800": selected,
+            className={classNames("text-[#fff] group-hover:text-[#afafaf] lg:hidden", {
+              "text-[#afafaf]": selected,
             })}
           />
         )}
         <span
-          className={classNames("flex-1 truncate text-neutral-500 group-hover:text-neutral-800", {
-            "text-neutral-800": selected,
+          className={classNames("flex-1 truncate text-[#fff] group-hover:text-[#afafaf]", {
+            "text-[#afafaf]": selected,
           })}
         >
           {name}

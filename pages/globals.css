@@ -19,10 +19,13 @@
   }
 }
 
+html {
+  background: #000;
+}
+
 body {
   /* Variables imported from layout.tsx > @aragon/ods */
-  color: var(--ods-color-neutral-800);
-  background-color: var(--ods-color-neutral-50);
+  color: #fff;
   font-family: var(--ods-font-family);
 }
 
@@ -33,14 +36,13 @@ h4,
 h5,
 h6 {
   /* Variables imported from layout.tsx > @aragon/ods */
-  color: var(--ods-color-neutral-800);
+  color: #fff;
 }
 
-p,
 ul,
 ol {
   /* Variables imported from layout.tsx > @aragon/ods */
-  color: var(--ods-color-neutral-600);
+  color: #fff;
 }
 
 /* Inline alerts */
@@ -64,3 +66,24 @@ label div p.leading-tight {
   }
 }
 */
+
+
+/* Overrides for aragon ods */
+.text-neutral-800 , .text-neutral-900 {
+  color: #fff !important;
+}
+
+.border-primary-300 {
+  border-color: #ff0083 !important;
+}
+
+
+.VotingIcon svg:first-child path {
+  fill: #000;
+
+}
+
+.VotingIcon svg:first-child path {
+  fill: #ff0083;
+
+}

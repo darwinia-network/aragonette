@@ -137,10 +137,10 @@ export default function Create() {
   return (
     <section className="flex w-screen min-w-full max-w-full flex-col items-center">
       <div className="w-full justify-between py-5">
-        <h1 className="mb-10 text-3xl font-semibold text-neutral-900">Create Proposal</h1>
+        <h1 className="mb-10 text-3xl font-semibold text-[#fff]">Create Proposal</h1>
         <div className="mb-6">
           <InputText
-            className=""
+            className="!text-[#000]"
             label="Title"
             maxLength={100}
             placeholder="A short title that describes the main purpose"
@@ -152,7 +152,7 @@ export default function Create() {
         <div className="mb-6">
           <TextAreaRichText
             label="Summary"
-            className="pt-2"
+            className="pt-2 text-[#000]"
             value={summary}
             onChange={setSummary}
             placeholder="A description for what the proposal is all about"
@@ -172,7 +172,7 @@ export default function Create() {
               <Icon
                 className={
                   "mt-2 !h-12 !w-10 p-2 " +
-                  (actionType === ActionType.Signaling ? "text-primary-400" : "text-neutral-400")
+                  (actionType === ActionType.Signaling ? "text-[#ff0083]" : "text-neutral-400")
                 }
                 icon={IconType.INFO}
                 size="lg"
@@ -188,7 +188,7 @@ export default function Create() {
               <Icon
                 className={
                   "mt-2 !h-12 !w-10 p-2 " +
-                  (actionType === ActionType.Withdrawal ? "text-primary-400" : "text-neutral-400")
+                  (actionType === ActionType.Withdrawal ? "text-[#ff0083]" : "text-neutral-400")
                 }
                 icon={IconType.WITHDRAW}
                 size="lg"
@@ -203,7 +203,7 @@ export default function Create() {
             >
               <Icon
                 className={
-                  "mt-2 !h-12 !w-10 p-2 " + (actionType === ActionType.Custom ? "text-primary-400" : "text-neutral-400")
+                  "mt-2 !h-12 !w-10 p-2 " + (actionType === ActionType.Custom ? "text-[#ff0083]" : "text-neutral-400")
                 }
                 icon={IconType.BLOCKCHAIN_BLOCKCHAIN}
                 size="lg"
@@ -226,7 +226,12 @@ export default function Create() {
             </div>
           </Then>
           <ElseIf condition={actionType !== ActionType.Custom}>
-            <Button className="mb-6 mt-14" size="lg" variant="primary" onClick={() => submitProposal()}>
+            <Button
+              className="mb-6 mt-14 border-[1px] !border-[#fff] bg-transparent duration-300 hover:!bg-[#fff] hover:!text-[#000]"
+              size="lg"
+              variant="primary"
+              onClick={() => submitProposal()}
+            >
               Submit proposal
             </Button>
           </ElseIf>
@@ -248,7 +253,7 @@ export default function Create() {
                 </Else>
               </If>
               <Button
-                className="mt-3"
+                className="mt-3 border-[1px] border-[#fff] bg-transparent duration-300 hover:bg-[#fff] hover:text-[#000] disabled:!border-[#fff] disabled:!bg-transparent disabled:!text-[#fff] disabled:opacity-50"
                 size="lg"
                 variant="primary"
                 disabled={!actions.length}
