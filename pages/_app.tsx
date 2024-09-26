@@ -16,6 +16,12 @@ export default function AragonetteApp({ Component, pageProps }: any) {
 
   return (
     <div className={manrope.className}>
+      <div className="sticky top-0 z-40 flex h-[50px] w-full items-center justify-center bg-[#ff0083]">
+        <p>
+          This is a <b className="font-[900]">BETA</b> version. Features and performance are subject to change and may
+          contain bugs.
+        </p>
+      </div>
       <Head>
         <title>{PUB_APP_NAME}</title>
       </Head>
