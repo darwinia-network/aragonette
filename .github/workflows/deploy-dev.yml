@@ -7,11 +7,12 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    matrix:
-      chain:
-        - crab 
-        - darwinia
-        - koi
+    strategy:
+      matrix:
+        chain:
+          - crab 
+          - darwinia
+          - koi
     steps:
       - uses: actions/checkout@v4
 
