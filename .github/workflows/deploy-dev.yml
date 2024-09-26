@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         chain:
-          - crab 
+          - crab
           - darwinia
           - koi
     steps:
@@ -38,6 +38,7 @@ jobs:
           vercel_token: ${{ secrets.VERCEL_TOKEN }}
           vercel_group: itering
           preview_output: true
+          preview_section: ${{ matrix.chain }}
           script_run: false
           dist_path: .
           project_name: aragonette
