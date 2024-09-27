@@ -45,3 +45,4 @@ jobs:
           project_name: aragonette
           enable_cache: false
           alias_domain: '${{ matrix.chain }}-vote'
+
