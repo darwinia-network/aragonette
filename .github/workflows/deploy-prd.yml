@@ -46,3 +46,4 @@ jobs:
           project_name: aragonette
           prod_mode: true
           enable_cache: false
+          alias_domain: ${{ matrix.chain == 'darwinia' && 'vote.ringdao.com' || format('{0}-vote.ringdao.com', matrix.chain) }}
