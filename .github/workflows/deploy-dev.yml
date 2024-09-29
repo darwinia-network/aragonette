@@ -10,8 +10,8 @@ jobs:
     strategy:
       matrix:
         chain:
-          - crab
-          - darwinia
+          # - crab
+          # - darwinia
           - koi
     steps:
       - uses: actions/checkout@v4
