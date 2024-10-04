@@ -39,6 +39,7 @@ export const config = createConfig({
   transports: {
     [PUB_CHAIN.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
     [mainnet.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
+    [darwinia.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
   },
   connectors: [
     walletConnect({
