@@ -21,25 +21,41 @@ const metadata = {
   icons: [PUB_WALLET_ICON],
 };
 
-// const crabChain: Chain = {
-//   // Define your Crab network configuration
-//   id: 421611, // Crab network chain ID
-//   name: "Darwinia Crab",
-//   rpcUrls: { default: { http: ["https://crab.rpc.darwinia.network"] } },
-//   nativeCurrency: {
-//     decimals: 18,
-//     name: "Crab",
-//     symbol: "CRAB",
-//   },
-//   blockExplorers: { default: { name: "Etherscan", url: "https://etherscan.io" } },
-// };
+const crabChain: Chain = {
+  // Define your Crab network configuration
+  id: 44, // Crab network chain ID
+  name: "Crab2",
+  rpcUrls: { default: { http: ["https://crab-rpc.darwinia.network"] } },
+  nativeCurrency: {
+    decimals: 18,
+    name: "Crab",
+    symbol: "CRAB",
+  },
+  blockExplorers: { default: { name: "Carb scab", url: "https://crab-scan.darwinia.network/" } },
+};
+
+const KoiChain: Chain = {
+  // Define your Crab network configuration
+  id: 701, // Crab network chain ID
+  name: "Koi",
+  rpcUrls: { default: { http: ["https://koi-rpc.darwinia.network"] } },
+  nativeCurrency: {
+    decimals: 18,
+    name: "KRing",
+    symbol: "KRING",
+  },
+  blockExplorers: { default: { name: "Koi scab", url: "https://koi-scan.darwinia.network/" } },
+};
+
 export const config = createConfig({
-  chains: [PUB_CHAIN, mainnet, darwinia],
+  chains: [PUB_CHAIN, mainnet, darwinia, crabChain, KoiChain],
   ssr: true,
   transports: {
     [PUB_CHAIN.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
     [mainnet.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
     [darwinia.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
+    [crabChain.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
+    [KoiChain.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
   },
   connectors: [
     walletConnect({
