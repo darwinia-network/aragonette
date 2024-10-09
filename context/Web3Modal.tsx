@@ -11,7 +11,6 @@ import {
   PUB_WEB3_ENDPOINT,
 } from "@/constants";
 import {mainnet, darwinia, crab} from "viem/chains";
-import type { Chain } from "viem/chains";
 
 // wagmi config
 const metadata = {
@@ -19,19 +18,6 @@ const metadata = {
   description: PUB_APP_DESCRIPTION,
   url: PUB_PROJECT_URL,
   icons: [PUB_WALLET_ICON],
-};
-
-const crabChain: Chain = {
-  // Define your Crab network configuration
-  id: 44, // Crab network chain ID
-  name: "Crab2",
-  rpcUrls: { default: { http: ["https://crab-rpc.darwinia.network"] } },
-  nativeCurrency: {
-    decimals: 18,
-    name: "Crab",
-    symbol: "CRAB",
-  },
-  blockExplorers: { default: { name: "Carb scab", url: "https://crab-scan.darwinia.network/" } },
 };
 
 export const config = createConfig({
