@@ -38,8 +38,8 @@ export const Navbar: React.FC = () => {
           >
             {(chainId === 46 || chainId === 701) && (
               <>
-                <Image src="/images/logo-icon.png" width="36" height="36" className="shrink-0" alt="Ring Dao" />
-                <Image src="/images/logo.png" width="100" height="36" className="shrink-0" alt="Ring Dao" />
+                <Image src="/images/logo-icon.png" width="36" height="36" className="shrink-0" alt="RingDAO" />
+                <Image src="/images/logo.png" width="100" height="36" className="shrink-0" alt="RingDAO" />
                 {chainId === 701 && (
                   <span className="hidden py-1 text-lg font-semibold leading-tight text-[#fff] sm:block md:text-xl">
                     Test Version
