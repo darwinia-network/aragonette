@@ -34,26 +34,13 @@ const crabChain: Chain = {
   blockExplorers: { default: { name: "Carb scab", url: "https://crab-scan.darwinia.network/" } },
 };
 
-const KoiChain: Chain = {
-  // Define your Crab network configuration
-  id: 701, // Crab network chain ID
-  name: "Koi",
-  rpcUrls: { default: { http: ["https://koi-rpc.darwinia.network"] } },
-  nativeCurrency: {
-    decimals: 18,
-    name: "KRing",
-    symbol: "KRING",
-  },
-  blockExplorers: { default: { name: "Koi scab", url: "https://koi-scan.darwinia.network/" } },
-};
-
 export const config = createConfig({
-  chains: [PUB_CHAIN, darwinia, crabChain, KoiChain],
+  chains: [PUB_CHAIN, darwinia, crabChain],
   ssr: true,
   transports: {
     [PUB_CHAIN.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
     [darwinia.id]: http(darwinia.rpcUrls.default.http[0], { batch: true }),
-    [crabChain.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
+    [crabChain.id]: http(crabChain.rpcUrls.default.http[0], { batch: true }),
   },
   connectors: [
     walletConnect({
