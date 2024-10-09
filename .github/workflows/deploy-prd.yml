@@ -30,10 +30,8 @@ jobs:
           vercel_token: ${{ secrets.VERCEL_TOKEN }}
           vercel_group: itering
           preview_output: true
-          preview_section: ${{ matrix.chain }}
           script_run: false
           dist_path: .
           project_name: aragonette
           prod_mode: true
           enable_cache: false
-          alias_domain: ${{ matrix.chain == 'darwinia' && 'vote.ringdao.com' || format('{0}-vote.ringdao.com', matrix.chain) }}
