@@ -10,7 +10,7 @@ import {
   PUB_WALLET_ICON,
   PUB_WEB3_ENDPOINT,
 } from "@/constants";
-import { mainnet } from "viem/chains";
+import {mainnet, darwinia, crab} from "viem/chains";
 
 // wagmi config
 const metadata = {
@@ -21,11 +21,13 @@ const metadata = {
 };
 
 export const config = createConfig({
-  chains: [PUB_CHAIN, mainnet],
+  chains: [PUB_CHAIN, mainnet, darwinia, crab],
   ssr: true,
   transports: {
     [PUB_CHAIN.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
-    [mainnet.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
+    [mainnet.id]: http(mainnet.rpcUrls.default.http[0], { batch: true }),
+    [darwinia.id]: http(darwinia.rpcUrls.default.http[0], { batch: true }),
+    [crab.id]: http(crab.rpcUrls.default.http[0], { batch: true }),
   },
   connectors: [
     walletConnect({

@@ -5,7 +5,7 @@ import Footer from "./footer";
 
 export const Layout: React.FC<{ children: ReactNode }> = (props) => {
   return (
-    <div className="flex flex-col items-center bg-[#000]">
+    <div className="relative flex flex-col items-center bg-[#000]">
       <div className="flex w-full flex-col items-center">
         <Image
           src="/images/1920bg1.png"
@@ -22,7 +22,7 @@ export const Layout: React.FC<{ children: ReactNode }> = (props) => {
           className="absolute left-0 right-0 top-0 h-[100vh] w-[100vw] object-contain object-left-top"
         />
         <Navbar />
-        <div className="relative z-10 flex w-full justify-center">
+        <div className="relative z-10 z-10 flex w-full justify-center">
           <span className="absolute left-0 top-0 block h-[20px] w-[20px] bg-[#fff]" />
           <div className="flex w-full flex-col items-center px-4 py-6 md:w-4/5 md:p-6 lg:w-2/3 xl:py-10 2xl:w-3/5">
             {props.children}
