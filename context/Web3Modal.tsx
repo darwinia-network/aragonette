@@ -35,11 +35,11 @@ const crabChain: Chain = {
 };
 
 export const config = createConfig({
-  chains: [PUB_CHAIN, darwinia, crabChain],
+  chains: [PUB_CHAIN, crabChain],
   ssr: true,
   transports: {
     [PUB_CHAIN.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
-    [darwinia.id]: http(darwinia.rpcUrls.default.http[0], { batch: true }),
+    // [darwinia.id]: http(darwinia.rpcUrls.default.http[0], { batch: true }),
     [crabChain.id]: http(crabChain.rpcUrls.default.http[0], { batch: true }),
   },
   connectors: [
