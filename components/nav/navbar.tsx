@@ -47,7 +47,7 @@ export const Navbar: React.FC = () => {
                 )}
               </>
             )}
-            {chainId === 44 && <h2 className="text-2xl font-[700]">Crab DAO</h2>}
+            {chainId === 44 && <h2 className="text-2xl font-[700]">CrabDAO</h2>}
           </Link>
           <div className="z-20 flex items-center gap-x-2">
             <div className="shrink-0">
