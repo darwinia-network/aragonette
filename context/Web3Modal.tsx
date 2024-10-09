@@ -10,7 +10,7 @@ import {
   PUB_WALLET_ICON,
   PUB_WEB3_ENDPOINT,
 } from "@/constants";
-import { mainnet, darwinia } from "viem/chains";
+import {darwinia} from "viem/chains";
 import type { Chain } from "viem/chains";
 
 // wagmi config
@@ -48,14 +48,12 @@ const KoiChain: Chain = {
 };
 
 export const config = createConfig({
-  chains: [PUB_CHAIN, mainnet, darwinia, crabChain, KoiChain],
+  chains: [PUB_CHAIN, darwinia, crabChain, KoiChain],
   ssr: true,
   transports: {
     [PUB_CHAIN.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
-    [mainnet.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
-    [darwinia.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
+    [darwinia.id]: http(darwinia.rpcUrls.default.http[0], { batch: true }),
     [crabChain.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
-    [KoiChain.id]: http(PUB_WEB3_ENDPOINT, { batch: true }),
   },
   connectors: [
     walletConnect({
