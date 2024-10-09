@@ -37,14 +37,17 @@ export const Navbar: React.FC = () => {
             )}
           >
             {(chainId === 46 || chainId === 701) && (
-              <Image src="/images/logo-icon.png" width="36" height="36" className="shrink-0" alt="Ring Dao" />
+              <>
+                <Image src="/images/logo-icon.png" width="36" height="36" className="shrink-0" alt="Ring Dao" />
+                <Image src="/images/logo.png" width="100" height="36" className="shrink-0" alt="Ring Dao" />
+                {chainId === 701 && (
+                  <span className="hidden py-1 text-lg font-semibold leading-tight text-[#fff] sm:block md:text-xl">
+                    Test Version
+                  </span>
+                )}
+              </>
             )}
-            <Image src="/images/logo.png" width="100" height="36" className="shrink-0" alt="Ring Dao" />
-            {chainId === 701 && (
-              <span className="hidden py-1 text-lg font-semibold leading-tight text-[#fff] sm:block md:text-xl">
-                Test Version
-              </span>
-            )}
+            {chainId === 44 && <h2 className="text-2xl font-[700]">Crab DAO</h2>}
           </Link>
           <div className="z-20 flex items-center gap-x-2">
             <div className="shrink-0">
