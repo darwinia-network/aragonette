@@ -8,18 +8,8 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        chain:
-          # - crab
-          # - darwinia
-          - koi
     steps:
       - uses: actions/checkout@v4
-
-      - name: Copy env
-        run: |
-          cp .env.${{ matrix.chain }} .env.production || true
 
       - name: Render penv
         id: render_template
@@ -39,10 +29,8 @@ jobs:
           vercel_token: ${{ secrets.VERCEL_TOKEN }}
           vercel_group: itering
           preview_output: true
-          preview_section: ${{ matrix.chain }}
           script_run: false
           dist_path: .
           project_name: aragonette
           enable_cache: false
-          alias_domain: '${{ matrix.chain }}-vote'
 
