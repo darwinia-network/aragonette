@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useBlockNumber, usePublicClient, useReadContract } from "wagmi";
-import { Hex, fromHex, getAbiItem } from "viem";
+import { Address, Hex, fromHex, getAbiItem } from "viem";
 import { TokenVotingAbi } from "@/plugins/tokenVoting/artifacts/TokenVoting.sol";
 import { Action } from "@/utils/types";
 import { Proposal, ProposalMetadata, ProposalParameters, Tally } from "@/plugins/tokenVoting/utils/types";
-import { PUB_TOKEN_VOTING_PLUGIN_ADDRESS } from "@/constants";
+// import { PUB_TOKEN_VOTING_PLUGIN_ADDRESS } from "@/constants";
 import { useMetadata } from "@/hooks/useMetadata";
+import useConstant from "@/hooks/useConstant";
 
 type ProposalCreatedLogResponse = {
   args: {
@@ -29,6 +30,7 @@ export function useProposal(proposalId: string, autoRefresh = false) {
   const [proposalCreationEvent, setProposalCreationEvent] = useState<ProposalCreatedLogResponse["args"]>();
   const [metadataUri, setMetadata] = useState<string>();
   const { data: blockNumber } = useBlockNumber();
+  const { publicTokenVotingPluginAddress } = useConstant();
 
   // Proposal on-chain data
   const {
@@ -37,7 +39,7 @@ export function useProposal(proposalId: string, autoRefresh = false) {
     fetchStatus: proposalFetchStatus,
     refetch: proposalRefetch,
   } = useReadContract({
-    address: PUB_TOKEN_VOTING_PLUGIN_ADDRESS,
+    address: publicTokenVotingPluginAddress as Address,
     abi: TokenVotingAbi,
     functionName: "getProposal",
     args: [BigInt(proposalId)],
@@ -54,7 +56,7 @@ export function useProposal(proposalId: string, autoRefresh = false) {
 
     publicClient
       .getLogs({
-        address: PUB_TOKEN_VOTING_PLUGIN_ADDRESS,
+        address: publicTokenVotingPluginAddress as Address,
         event: ProposalCreatedEvent as any,
         args: {
           proposalId: BigInt(proposalId),

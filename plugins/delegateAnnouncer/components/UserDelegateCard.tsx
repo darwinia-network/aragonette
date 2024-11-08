@@ -11,7 +11,7 @@ import { iVotesAbi } from "../artifacts/iVotes.sol";
 import { formatHexString } from "@/utils/evm";
 import { DelegateAnnouncerAbi } from "@/plugins/delegateAnnouncer/artifacts/DelegateAnnouncer.sol";
 import * as DOMPurify from "dompurify";
-import { PUB_DAO_ADDRESS, PUB_DELEGATION_CONTRACT_ADDRESS } from "@/constants";
+import useConstant from "@/hooks/useConstant";
 
 type SelfDelegationProfileCardProps = {
   address: Address;
@@ -56,12 +56,14 @@ export const SelfDelegationProfileCard = ({
     });
   };
 
+  const { publicDaoAddress, publicDelegationContractAddress } = useConstant();
+
   const announceDelegate = () => {
     delegateAnnouncementWrite({
       abi: DelegateAnnouncerAbi,
-      address: PUB_DELEGATION_CONTRACT_ADDRESS,
+      address: publicDelegationContractAddress as Address,
       functionName: "announceDelegation",
-      args: [PUB_DAO_ADDRESS, toHex(inputDescription!)],
+      args: [publicDaoAddress as Address, toHex(inputDescription!)],
     });
   };
 

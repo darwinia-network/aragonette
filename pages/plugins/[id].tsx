@@ -3,14 +3,17 @@ import { useRouter } from "next/router";
 import { PleaseWaitSpinner } from "@/components/please-wait";
 import { resolveQueryParam } from "@/utils/query";
 import { NotFound } from "@/components/not-found";
-import { plugins } from "@/plugins";
+// import { plugins } from "@/plugins";
 import { logger } from "@/services/logger";
+import usePlugins from "@/hooks/usePlugins";
 
 const PluginLoader: FC = () => {
   const { query } = useRouter();
   const pluginId = resolveQueryParam(query.id);
   const [PageComponent, setPageComponent] = useState<FC | null>(null);
   const [componentLoading, setComponentLoading] = useState(true);
+
+  const plugins = usePlugins();
 
   useEffect(() => {
     if (!pluginId) return;

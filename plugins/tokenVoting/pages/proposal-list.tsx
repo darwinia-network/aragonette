@@ -1,4 +1,4 @@
-import { useAccount, useBlockNumber, useReadContract } from "wagmi";
+import { useAccount, useBlockNumber, useChainId, useReadContract } from "wagmi";
 import { type ReactNode, useEffect, useState } from "react";
 import ProposalCard from "@/plugins/tokenVoting/components/proposal";
 import { TokenVotingAbi } from "@/plugins/tokenVoting/artifacts/TokenVoting.sol";
@@ -12,32 +12,60 @@ import { digestPagination } from "@/utils/pagination";
 import { useVotingToken } from "@/plugins/tokenVoting/hooks/useVotingToken";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useRouter } from "next/router";
+import { useEthersSigner } from "@/hooks/ethers";
+import { ethers } from "ethers";
+import useConstant from "@/hooks/useConstant";
 
 export default function Proposals() {
   const { isConnected } = useAccount();
   const { open } = useWeb3Modal();
   const { push } = useRouter();
+  const chainId = useChainId();
+  const [proposalCount, setProposalCount] = useState<number>(1);
+
+  const { publicTokenVotingPluginAddress } = useConstant();
+  console.log("publicTokenVotingPluginAddress", publicTokenVotingPluginAddress);
+
+  const signer = useEthersSigner({ chainId });
+
+  const isLoading = false;
+
+  async function fetchProposalCount() {
+    try {
+      console.log("hello");
+      if (publicTokenVotingPluginAddress) {
+        const contract = new ethers.Contract(publicTokenVotingPluginAddress, TokenVotingAbi, signer);
+        let count = await contract.proposalCount();
+        setProposalCount(count);
+        console.log("Proposal count:", count.toString());
+      }
+    } catch (error) {
+      console.error("Error fetching proposal count:", error);
+    }
+  }
+
+  fetchProposalCount();
 
   const { data: blockNumber } = useBlockNumber({ watch: true });
   const canCreate = useCanCreateProposal();
   const { tokenSupply } = useVotingToken();
   const [currentPage, setCurrentPage] = useState(0);
 
-  const {
-    data: proposalCountResponse,
-    isLoading,
-    refetch,
-  } = useReadContract({
-    address: PUB_TOKEN_VOTING_PLUGIN_ADDRESS,
-    abi: TokenVotingAbi,
-    functionName: "proposalCount",
-  });
+  // const {
+  //   data: proposalCountResponse,
+  //   isLoading,
+  //   refetch,
+  // } = useReadContract({
+  //   address: PUB_TOKEN_VOTING_PLUGIN_ADDRESS,
+  //   abi: TokenVotingAbi,
+  //   functionName: "proposalCount",
+  // });
 
-  useEffect(() => {
-    refetch();
-  }, [blockNumber]);
+  // useEffect(() => {
+  //   refetch();
+  // }, [blockNumber]);
 
-  const proposalCount = Number(proposalCountResponse);
+  // const proposalCount = Number(proposalCountResponse);
   const { visibleProposalIds, showNext, showPrev } = digestPagination(proposalCount, currentPage);
 
   return (

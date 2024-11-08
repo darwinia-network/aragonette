@@ -3,18 +3,21 @@ import { useWaitForTransactionReceipt, useWriteContract, useReadContract } from 
 import { TokenVotingAbi } from "../artifacts/TokenVoting.sol";
 import { AlertContextProps, useAlerts } from "@/context/Alerts";
 import { useRouter } from "next/router";
-import { PUB_CHAIN, PUB_TOKEN_VOTING_PLUGIN_ADDRESS } from "@/constants";
+import { PUB_CHAIN } from "@/constants";
+import useConstant from "@/hooks/useConstant";
+import { Address } from "viem";
 
 export function useProposalExecute(proposalId: string) {
   const { reload } = useRouter();
   const { addAlert } = useAlerts() as AlertContextProps;
+  const { publicTokenVotingPluginAddress } = useConstant();
 
   const {
     data: canExecute,
     isError: isCanVoteError,
     isLoading: isCanVoteLoading,
   } = useReadContract({
-    address: PUB_TOKEN_VOTING_PLUGIN_ADDRESS,
+    address: publicTokenVotingPluginAddress as Address,
     abi: TokenVotingAbi,
     chainId: PUB_CHAIN.id,
     functionName: "canExecute",
@@ -34,7 +37,7 @@ export function useProposalExecute(proposalId: string) {
     executeWrite({
       chainId: PUB_CHAIN.id,
       abi: TokenVotingAbi,
-      address: PUB_TOKEN_VOTING_PLUGIN_ADDRESS,
+      address: publicTokenVotingPluginAddress as Address,
       functionName: "execute",
       args: [BigInt(proposalId)],
     });
