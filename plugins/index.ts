@@ -1,5 +1,6 @@
 import { PUB_DELEGATION_CONTRACT_ADDRESS, PUB_TOKEN_VOTING_PLUGIN_ADDRESS } from "@/constants";
 import { IconType } from "@aragon/ods";
+import { ethers } from "ethers";
 
 type PluginItem = {
   /** The URL fragment after /plugins */

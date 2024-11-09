@@ -1,27 +1,28 @@
 import { usePublicClient, useReadContract } from "wagmi";
 import { useAccount } from "wagmi";
-import { PublicClient, parseAbi } from "viem";
-import { ReactNode } from "react";
+import { Address, PublicClient, parseAbi } from "viem";
+import { ReactNode, useState } from "react";
 import { Else, ElseIf, If, Then } from "@/components/if";
 import { PleaseWaitSpinner } from "@/components/please-wait";
 import { useDelegateAnnouncements } from "../hooks/useDelegateAnnouncements";
 import { DelegateCard } from "@/plugins/delegateAnnouncer/components/DelegateCard";
 import { SelfDelegationProfileCard } from "../components/UserDelegateCard";
-import { PUB_DAO_ADDRESS, PUB_DELEGATION_CONTRACT_ADDRESS, PUB_TOKEN_ADDRESS } from "@/constants";
+import useConstant from "@/hooks/useConstant";
 
 export default function DelegateAnnouncements() {
   const publicClient = usePublicClient();
   const account = useAccount();
+  const { publicDaoAddress, publicDelegationContractAddress, publicTokenAddress } = useConstant();
   const { data: delegates, status } = useReadContract({
     abi: iVotesAbi,
-    address: PUB_TOKEN_ADDRESS,
+    address: publicTokenAddress as Address,
     functionName: "delegates",
     args: [account.address!],
   });
   const { delegateAnnouncements, isLoading: delegateAnnouncementsIsLoading } = useDelegateAnnouncements(
     publicClient as PublicClient,
-    PUB_DELEGATION_CONTRACT_ADDRESS,
-    PUB_DAO_ADDRESS
+    publicDelegationContractAddress as Address,
+    publicDaoAddress as Address
   );
 
   return (
@@ -31,7 +32,7 @@ export default function DelegateAnnouncements() {
           <h2 className="pb-3 text-xl font-semibold text-[#fff]">Your profile</h2>
           <SelfDelegationProfileCard
             address={account.address!}
-            tokenAddress={PUB_TOKEN_ADDRESS}
+            tokenAddress={publicTokenAddress as Address}
             delegates={delegates!}
             loading={status === "pending"}
             message={delegateAnnouncements.findLast((an) => an.delegate === account.address)?.message}
@@ -49,7 +50,7 @@ export default function DelegateAnnouncements() {
                 delegates={delegates!}
                 delegate={announcement.delegate}
                 message={announcement.message}
-                tokenAddress={PUB_TOKEN_ADDRESS}
+                tokenAddress={publicTokenAddress as Address}
               />
             ))}
           </div>

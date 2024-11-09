@@ -1,5 +1,5 @@
 import WalletContainer from "@/components/WalletContainer";
-import { plugins } from "@/plugins";
+// import { plugins } from "@/plugins";
 import { AvatarIcon, IconType } from "@aragon/ods";
 import classNames from "classnames";
 import Image from "next/image";
@@ -8,12 +8,14 @@ import { useState } from "react";
 import { MobileNavDialog } from "./mobileNavDialog";
 import { NavLink, type INavLink } from "./navLink";
 import { useChainId } from "wagmi";
+import usePlugins from "@/hooks/usePlugins";
 
 export const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
   const chainId = useChainId();
 
   console.log("chain id", chainId);
+  const plugins = usePlugins();
 
   const navLinks: INavLink[] = [
     // { path: "/", id: "dashboard", name: "Dashboard", icon: IconType.APP_DASHBOARD },

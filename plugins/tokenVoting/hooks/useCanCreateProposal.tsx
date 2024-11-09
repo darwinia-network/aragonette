@@ -1,30 +1,33 @@
 import { Address } from "viem";
 import { useState, useEffect } from "react";
-import { useBalance, useAccount, useReadContracts } from "wagmi";
+import { useBalance, useAccount, useReadContracts, useChainId } from "wagmi";
 import { TokenVotingAbi } from "@/plugins/tokenVoting/artifacts/TokenVoting.sol";
-import { PUB_CHAIN, PUB_TOKEN_VOTING_PLUGIN_ADDRESS } from "@/constants";
+// import { PUB_CHAIN, PUB_TOKEN_VOTING_PLUGIN_ADDRESS } from "@/constants";
+import useConstant from "@/hooks/useConstant";
 
 export function useCanCreateProposal() {
   const { address } = useAccount();
+  const { publicTokenVotingPluginAddress } = useConstant();
   const [minProposerVotingPower, setMinProposerVotingPower] = useState<bigint>();
   const [votingToken, setVotingToken] = useState<Address>();
+  const chainId = useChainId();
   const { data: balance } = useBalance({
     address,
     token: votingToken,
-    chainId: PUB_CHAIN.id,
+    chainId: chainId,
   });
 
   const { data: contractReads } = useReadContracts({
     contracts: [
       {
-        chainId: PUB_CHAIN.id,
-        address: PUB_TOKEN_VOTING_PLUGIN_ADDRESS,
+        chainId: chainId,
+        address: publicTokenVotingPluginAddress as Address,
         abi: TokenVotingAbi,
         functionName: "minProposerVotingPower",
       },
       {
-        chainId: PUB_CHAIN.id,
-        address: PUB_TOKEN_VOTING_PLUGIN_ADDRESS,
+        chainId: chainId,
+        address: publicTokenVotingPluginAddress as Address,
         abi: TokenVotingAbi,
         functionName: "getVotingToken",
       },

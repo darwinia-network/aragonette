@@ -3,7 +3,7 @@ import { Button, IconType, Icon, InputText, TextAreaRichText } from "@aragon/ods
 import React, { useEffect, useState } from "react";
 import { uploadToIPFS } from "@/utils/ipfs";
 import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
-import { toHex } from "viem";
+import { Address, toHex } from "viem";
 import { TokenVotingAbi } from "@/plugins/tokenVoting/artifacts/TokenVoting.sol";
 import { useAlerts } from "@/context/Alerts";
 import WithdrawalInput from "@/components/input/withdrawal";
@@ -13,8 +13,9 @@ import { getPlainText } from "@/utils/html";
 import { useRouter } from "next/router";
 import { Else, ElseIf, If, Then } from "@/components/if";
 import { PleaseWaitSpinner } from "@/components/please-wait";
-import { PUB_CHAIN, PUB_IPFS_API_KEY, PUB_IPFS_ENDPOINT, PUB_TOKEN_VOTING_PLUGIN_ADDRESS } from "@/constants";
+import { PUB_CHAIN, PUB_IPFS_API_KEY, PUB_IPFS_ENDPOINT } from "@/constants";
 import { ActionCard } from "@/components/actions/action";
+import useConstant from "@/hooks/useConstant";
 
 enum ActionType {
   Signaling,
@@ -36,6 +37,7 @@ export default function Create() {
   const { writeContract: createProposalWrite, data: createTxHash, status, error } = useWriteContract();
   const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({ hash: createTxHash });
   const [actionType, setActionType] = useState<ActionType>(ActionType.Signaling);
+  const { publicTokenVotingPluginAddress } = useConstant();
 
   const changeActionType = (actionType: ActionType) => {
     setActions([]);
@@ -122,7 +124,7 @@ export default function Create() {
     createProposalWrite({
       chainId: PUB_CHAIN.id,
       abi: TokenVotingAbi,
-      address: PUB_TOKEN_VOTING_PLUGIN_ADDRESS,
+      address: publicTokenVotingPluginAddress as Address,
       functionName: "createProposal",
       args: [toHex(ipfsPin), actions, BigInt(0), BigInt(0), BigInt(0), 0, false],
     });
